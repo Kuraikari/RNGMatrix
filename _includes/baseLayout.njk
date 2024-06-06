@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        {% block main %}
+            {% include "navbar_top.njk" %}
+
+            {% block content %}
+                {{ content | safe }}
+            {% endblock content %}
+
+            {% include "footer.njk" %}
+        {% endblock %}
+
+        {% include "scripts.njk" %}
+    </body>
+</html>
