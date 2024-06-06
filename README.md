@@ -17,6 +17,7 @@ RNGMatrix is a web application that utilizes a random number generator to create
 - **Export/Import**: Export matrices to CSV and import matrices from CSV files.
 
 ## Technologies Used
+- **Nunjucks**: Used for templating
 - **HTML**: Structure of the web application.
 - **CSS**: Styling of the application.
 - **JavaScript**: Functionality and logic for matrix operations and interactions.
