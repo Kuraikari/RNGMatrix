@@ -1,0 +1,17 @@
+input[type="url"] {
+    &::before {
+        content: 'https://';
+        display: inline-block;
+        height: 100%;
+        font-size: 1rem;
+        background-color: #fefefe;
+        color: #dedede;
+    }
+
+    &:hover {
+        &::before {
+            background-color: #6466fe;
+            color: white;
+        }
+    }
+}
