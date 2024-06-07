@@ -1,14 +1,14 @@
 @import "_reset.css";
+@import "icomoon-v1.0/style.css";
 @import "_variables.css";
 @import "_inputs.css";
 @import "_nav.css";
 
 :root {
-    --menu-width: 37.5em; /* Width of menu */
-    --items: 4; /* Number of items you have */
-    --item-width: calc(var(--menu-width) / var(--items));
+    --section-medium-width: 1550px;
+    --section-small-width: 750px;
 
-    font-size: 16px;
+    font-size: var(--font-size-medium);
 }
 
 body {
@@ -21,8 +21,33 @@ body {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: var(--font-size-xxxlarge);
     font-weight: bold;
+}
+
+h2 {
+    font-size: var(--font-size-xxlarge);
+    font-weight: bold;
+}
+
+header {
+    padding-block: var(--padding-med);
+}
+
+section.section {
+    padding-block: var(--padding-med);
+
+    &.medium {
+        width: var(--section-medium-width);
+        margin-inline: auto;
+        padding-block: var(--padding-xlarge);
+    }
+
+    &.small {
+        width: var(--section-small-width);
+        margin-inline: auto;
+        padding-block: var(--padding-min);
+    }
 }
 
 .footer-wrapper {
@@ -42,5 +67,9 @@ footer {
         gap: 10px;
         width: 100%;
         list-style: none;
+        
+        & li {
+            padding: var(--padding-med) var(--padding-large);
+        }
     }
 }
