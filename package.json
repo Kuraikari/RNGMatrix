@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx @11ty/eleventy"
+    "start": "npx @11ty/eleventy && node app.js"
   },
+  "type": "commonjs",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "@11ty/eleventy": "^2.0.1"
   },
   "dependencies": {
+    "express": "^4.19.2",
     "nunjucks": "^3.2.4"
   }
 }
