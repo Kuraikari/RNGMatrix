@@ -73,3 +73,25 @@ footer {
         }
     }
 }
+
+.table {
+    display: flex;
+    flex-direction: column;
+
+    & > .table-head {
+        & .table-column {
+            font-weight: bold;
+        }
+    }
+
+    & > .table-body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    & > .table-body, & > .table-head {
+        & .table-row {
+            display: grid;
+        }
+    }
+}
