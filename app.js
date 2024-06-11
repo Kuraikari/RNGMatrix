@@ -5,6 +5,7 @@
 var express    = require('express');        // call express
 var backend    = express();                 // define our app using express
 var bodyParser = require('body-parser');
+var path 	   = require('path');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -42,15 +43,16 @@ var frontend   = express();                 // define our app using express
 var frontendPort = process.env.FRONTENDPORT || 3001;        // set our port
 var frontendRouter = express.Router();              // get an instance of the express Router
 
+frontend.use("/css", express.static(path.join(__dirname, '/_site/css')));
+frontend.use("/js", express.static(path.join(__dirname, '/_site/js')));
 frontend.set('views', __dirname + '/_site');
 
-frontendRouter.get('/', (req, res) => {
-	res.render('layout', {title: 'Frontpage'});
-});
 
-frontendRouter.get('/about', (req, res) => {
-	res.render('layout', {title: 'About us'});
-});
+frontendRouter.get('/', (req, res) => {
+	res.sendFile('index.html', {
+	  root: './_site'
+	});
+ });
 
 frontend.use('/', frontendRouter);
 
