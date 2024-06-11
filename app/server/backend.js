@@ -43,7 +43,46 @@ backendRouter.get("/songs", function(req, res) {
         console.debug(data);
         res.send({ data });
     })
-    .then(reason => console.error(reason));
+    .then(reason => res.send(reason));
+});
+
+backendRouter.get("/song/:id", function(req, res) {
+    json.LoadJSONFiles()
+    .then((resp) => resp)
+    .then((data) => {
+        console.debug(data);
+        res.send({ data });
+    })
+    .catch(reason => res.send(reason));
+});
+
+backendRouter.post("/song", function(req, res) {
+    try {
+       const {data} = req.body;
+       const SongModel = require("../../Models/SongModel.js");
+       const defaultSong = new SongModel();
+       defaultSong.name
+
+       json.CreateJSONFile(defaultSong)
+        .then((resp) => resp)
+        .then((data) => {
+            res.send({ data });
+        })
+        .catch(reason => res.send(reason));
+
+    } catch (error) {
+        const SongModel = require("../../Models/SongModel.js");
+        const defaultSong = new SongModel();
+        defaultSong.id = Number.parseInt(Math.random()*100);
+
+        json.CreateJSONFile(defaultSong)
+        .then((resp) => resp)
+        .then((data) => {
+            res.send({ data });
+        })
+        .catch(reason => res.send(reason));
+    }
+    
 });
 
 // more routes for our API will happen here

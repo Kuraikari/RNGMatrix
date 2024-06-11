@@ -7,10 +7,10 @@ const SongModel = require("../../../Models/SongModel");
  */
 async function createJson(data) {
     const jsonContent = JSON.stringify(data);
-    const path = "../_saves";
+    const path = "./_saves";
 
     try {
-        await fs.writeFile(`${path}/${data.Id}.json`);
+        await fs.writeFile(`${path}/${data.returnId()}.json`, jsonContent);
     } catch (e) {
         console.error(e);
     }
