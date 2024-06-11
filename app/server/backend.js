@@ -6,6 +6,7 @@ var express    = require('express');        // call express
 var backend    = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var cors       = require('cors');
+var json       = require('./utils/json.js');
 
 const title = "RNG-Backend";
 const email = "zwermi@gmail.com";
@@ -33,6 +34,16 @@ backendRouter.get('/', function(req, res) {
 
 backendRouter.get("/status", function(req, res) {
     res.send({ message: backend.get("title") + ' is running'});
+});
+
+backendRouter.get("/songs", function(req, res) {
+    json.LoadJSONFiles()
+    .then((resp) => resp)
+    .then((data) => {
+        console.debug(data);
+        res.send({ data });
+    })
+    .then(reason => console.error(reason));
 });
 
 // more routes for our API will happen here

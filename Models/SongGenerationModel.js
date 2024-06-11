@@ -15,4 +15,4 @@ class SongGenerationModel {
     }
 }
 
-export default SongGenerationModel;
+module.exports = SongGenerationModel;

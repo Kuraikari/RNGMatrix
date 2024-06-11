@@ -1,4 +1,4 @@
-import SongGenerationModel from "./SongGenerationModel";
+const SongGenerationModel = require("./SongGenerationModel");
 
 /**
  * Model class for udio generations
@@ -14,4 +14,4 @@ class SongModel {
     SongGenerations = [];
 }
 
-export default SongModel;
+module.exports = SongModel;

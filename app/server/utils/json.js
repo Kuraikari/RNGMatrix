@@ -1,5 +1,5 @@
-import fs from "fs/promises";
-import SongModel from "../../Models/SongModel";
+const fs = require("fs/promises");
+const SongModel = require("../../../Models/SongModel");
 
 /**
  * 
@@ -17,8 +17,8 @@ async function createJson(data) {
 }
 
 async function loadJson() {
-    const path = "../_saves";
-    const fileNames = await fs.readdir();
+    const path = "./_saves";
+    const fileNames = await fs.readdir(path);
     
     try {
         const files = await Promise.all(fileNames.map(async (fn) => {
@@ -32,8 +32,7 @@ async function loadJson() {
     }
 }
 
-
-export {
-    createJson as CreateJSONFile,
-    loadJson as LoadJSONFiles
+module.exports = {
+    CreateJSONFile: createJson,
+    LoadJSONFiles: loadJson
 }
