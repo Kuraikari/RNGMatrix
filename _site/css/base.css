@@ -92,6 +92,12 @@ footer {
     & > .table-body, & > .table-head {
         & .table-row {
             display: grid;
+            grid-template-columns: 0fr 1fr 1fr;
+            grid-template-areas: ". a a";
+
+            & .table-row-item, & .table-column {
+                grid-area: a;
+            }
         }
     }
 }
