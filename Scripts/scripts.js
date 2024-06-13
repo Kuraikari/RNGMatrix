@@ -22,8 +22,26 @@ async function fetchData() {
     }
 }
 
-function createData() {
-
+/**
+ * 
+ * @param {SongModel} data 
+ */
+async function createData(data) {
+    try {
+        const resp = await fetch('http://localhost:3000/api/song', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        
+        const content = await resp.json();
+        return content;
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 document.addEventListener("DOMContentLoaded", (e) => {
