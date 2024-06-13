@@ -1,0 +1,29 @@
+---
+layout: baseLayout.njk
+title: RNGMatrix - Song - Generations
+cssFile: "base.css"
+---
+<section class="section medium">
+    <header>
+        <h1>{{ title }}</h1>
+    </header>
+    <main>
+        <p>
+            Welcome to the {{title}} web application.<br>
+            It is used to store any settings for your udio songs.<br>
+            With the saved settings, you can always go back to udio and re-create or re-imagine the songs you liked the most.
+        </p>
+        <p>
+            <div class="input-wrapper url-input collapsible" tabindex="-1">
+                <input type="url" class="input" name="url" placeholder="URL">
+            </div>
+
+            <div class="input-wrapper search-input collapsible" tabindex="-1">
+                <input type="search" class="input" name="url" placeholder="Search for">
+            </div>
+        </p>
+        <p>
+            {% include "songsTable.njk" %}
+        </p>
+    </main>
+</section>
