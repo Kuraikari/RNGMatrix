@@ -1,5 +1,5 @@
 import SongGenerationModel from "./SongGenerationModel.js";
-import { getRandomString } from "./../utils/random.js";
+import getRandomString from "../utils/random.js";
 
 /**
  * Model class for udio generations

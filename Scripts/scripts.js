@@ -1,4 +1,4 @@
-import * as SongModel from "./models/SongModel.js";
+import SongModel from "./models/SongModel.js";
 
 /**
  * 

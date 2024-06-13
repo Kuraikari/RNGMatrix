@@ -3,14 +3,18 @@
  * FRONTEND
  */
 // call the packages we need
-var express    = require('express');        // call express
-var path 	   = require('path');
+import express, { Router, static as eStatic} from 'express';        // call express
+import { join } from 'path';
+import * as url from 'url';
+
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 var frontend   = express();                 // define our app using express
-var frontendRouter = express.Router();              // get an instance of the express Router
+var frontendRouter = Router();              // get an instance of the express Router
 
-frontend.use("/css", express.static(path.join('./_site/css')));
-frontend.use("/js", express.static(path.join('./_site/js')));
+frontend.use("/css", eStatic(join('./_site/css')));
+frontend.use("/js", eStatic(join('./_site/js')));
 frontend.set('views', __dirname + '/_site');
 
 frontendRouter.get('/', (req, res) => {
@@ -21,4 +25,4 @@ frontendRouter.get('/', (req, res) => {
 
 frontend.use('/', frontendRouter);
 
-module.exports = frontend;
+export {frontend as frontendListen};

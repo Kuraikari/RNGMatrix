@@ -1,5 +1,5 @@
-const fs = require("fs/promises");
-const SongModel = require("../../../Models/SongModel");
+import { writeFile, readdir, readFile } from "fs/promises";
+import SongModel from "../../../Scripts/models/SongModel.js";
 
 /**
  * 
@@ -10,7 +10,7 @@ async function createJson(data) {
     const path = "./_saves";
 
     try {
-        await fs.writeFile(`${path}/${data.returnId()}.json`, jsonContent);
+        await writeFile(`${path}/${data.returnId()}.json`, jsonContent);
     } catch (e) {
         console.error(e);
     }
@@ -18,11 +18,11 @@ async function createJson(data) {
 
 async function loadJson() {
     const path = "./_saves";
-    const fileNames = await fs.readdir(path);
+    const fileNames = await readdir(path);
     
     try {
         const files = await Promise.all(fileNames.map(async (fn) => {
-            const data = await fs.readFile(`${path}/${fn}`, { encoding: 'utf8'});
+            const data = await readFile(`${path}/${fn}`, { encoding: 'utf8'});
             return JSON.parse(data);
         })); 
         console.debug(files);
@@ -32,7 +32,5 @@ async function loadJson() {
     }
 }
 
-module.exports = {
-    CreateJSONFile: createJson,
-    LoadJSONFiles: loadJson
-}
+export const CreateJSONFile = createJson;
+export const LoadJSONFiles = loadJson;

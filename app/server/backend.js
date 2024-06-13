@@ -2,16 +2,16 @@
 // =============================================================================
 
 // call the packages we need
-var express    = require('express');        // call express
-var backend    = express();                 // define our app using express
-var bodyParser = require('body-parser');
-var cors       = require('cors');
-var json       = require('./utils/json.js');
+import express, { Router } from 'express';        // call express
+import bodyparser from 'body-parser';
+import cors from 'cors';
+import { LoadJSONFiles, CreateJSONFile } from './utils/json.js';
 
 const title = "RNG-Backend";
 const email = "zwermi@gmail.com";
 const backendVersion = "0.1.0";
 
+const backend    = express();                 // define our app using express
 backend.set('title', title);
 backend.set('email', email);
 backend.set('version', backendVersion);
@@ -20,12 +20,12 @@ backend.use(cors())
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
-backend.use(bodyParser.urlencoded({ extended: true }));
-backend.use(bodyParser.json());
+backend.use(bodyparser.urlencoded({ extended: true }));
+backend.use(bodyparser.json());
 
 // ROUTES FOR OUR API
 // =============================================================================
-var backendRouter = express.Router();              // get an instance of the express Router
+var backendRouter = Router();              // get an instance of the express Router
 
 // test route to make sure everything is working (accessed at GET http://localhost:3000/api)
 backendRouter.get('/', function(req, res) {
@@ -37,7 +37,7 @@ backendRouter.get("/status", function(req, res) {
 });
 
 backendRouter.get("/songs", function(req, res) {
-    json.LoadJSONFiles()
+    LoadJSONFiles()
     .then((resp) => resp)
     .then((data) => {
         console.debug(data);
@@ -47,7 +47,7 @@ backendRouter.get("/songs", function(req, res) {
 });
 
 backendRouter.get("/song/:id", function(req, res) {
-    json.LoadJSONFiles()
+    LoadJSONFiles()
     .then((resp) => resp)
     .then((data) => {
         console.debug(data);
@@ -59,11 +59,11 @@ backendRouter.get("/song/:id", function(req, res) {
 backendRouter.post("/song", function(req, res) {
     try {
        const {data} = req.body;
-       const SongModel = require("../../Models/SongModel.js");
+       const SongModel = require("../../Models/SongModel.js").default;
        const defaultSong = new SongModel();
        defaultSong.name
 
-       json.CreateJSONFile(defaultSong)
+       CreateJSONFile(defaultSong)
         .then((resp) => resp)
         .then((data) => {
             res.send({ data });
@@ -71,11 +71,11 @@ backendRouter.post("/song", function(req, res) {
         .catch(reason => res.send(reason));
 
     } catch (error) {
-        const SongModel = require("../../Models/SongModel.js");
+        const SongModel = require("../../Models/SongModel.js").default;
         const defaultSong = new SongModel();
         defaultSong.id = Number.parseInt(Math.random()*100);
 
-        json.CreateJSONFile(defaultSong)
+        CreateJSONFile(defaultSong)
         .then((resp) => resp)
         .then((data) => {
             res.send({ data });
@@ -91,4 +91,4 @@ backendRouter.post("/song", function(req, res) {
 // all of our routes will be prefixed with /api
 backend.use('/api', backendRouter);
 
-module.exports = backend;
+export { backend as backendListen };
