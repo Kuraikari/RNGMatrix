@@ -1,8 +1,8 @@
 import SongModel from "./models/SongModel.js";
 
 /**
- * 
- * @returns 
+ * Fetches the current status of the backend
+ * @returns json of retrieved status message
  */
 async function fetchStatus() {
     try {
@@ -13,6 +13,10 @@ async function fetchStatus() {
     }
 }
 
+/**
+ * Fetches data from the backend using the api for retrieving songs.
+ * @returns {string} json of retrieved songs
+ */
 async function fetchData() {
     try {
         const re = await fetch("http://localhost:3000/api/songs");
@@ -24,7 +28,7 @@ async function fetchData() {
 
 /**
  * 
- * @param {SongModel} data 
+ * @param {SongModel} data Model for the song data
  */
 async function createData(data) {
     try {
