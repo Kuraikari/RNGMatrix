@@ -29,6 +29,7 @@ async function fetchData() {
 /**
  * 
  * @param {SongModel} data Model for the song data
+ * @returns {string} the response as a json string
  */
 async function createData(data) {
     try {
