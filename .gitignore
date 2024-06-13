@@ -130,4 +130,8 @@ dist
 .pnp.*
 
 # generated page
-
+_site
+_site/js
+_site/css/*.css
+_site/js/*.js
+_site/index.html
