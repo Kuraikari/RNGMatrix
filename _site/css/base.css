@@ -2,6 +2,7 @@
 @import "icomoon-v1.0/style.css";
 @import "_variables.css";
 @import "_inputs.css";
+@import "_components.css";
 @import "_nav.css";
 
 :root {
@@ -16,8 +17,9 @@ body {
     padding: 0;
     font-family: 'Roboto', sans-serif;
     height: 100vh;
-    overflow: hidden;
     width: 100vw;
+    background-color: var(--gray-medium);
+    color: var(--primary-foreground);
 }
 
 h1 {
@@ -28,6 +30,10 @@ h1 {
 h2 {
     font-size: var(--font-size-xxlarge);
     font-weight: bold;
+}
+
+a {
+    color: var(--accent-color);
 }
 
 header {
@@ -70,34 +76,6 @@ footer {
         
         & li {
             padding: var(--padding-med) var(--padding-large);
-        }
-    }
-}
-
-.table {
-    display: flex;
-    flex-direction: column;
-
-    & > .table-head {
-        & .table-column {
-            font-weight: bold;
-        }
-    }
-
-    & > .table-body {
-        display: flex;
-        flex-direction: column;
-    }
-
-    & > .table-body, & > .table-head {
-        & .table-row {
-            display: grid;
-            grid-template-columns: 0fr 1fr 1fr;
-            grid-template-areas: ". a a";
-
-            & .table-row-item, & .table-column {
-                grid-area: a;
-            }
         }
     }
 }

@@ -43,7 +43,7 @@ backendRouter.get("/songs", function(req, res) {
         console.debug(data);
         res.send({ data });
     })
-    .then(reason => res.send(reason));
+    .catch(reason => res.send(reason));
 });
 
 backendRouter.get("/song/:id", function(req, res) {

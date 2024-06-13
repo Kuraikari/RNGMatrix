@@ -59,6 +59,7 @@ nav {
     display: block;
     height: 300px;
     width: calc(var(--menu-width) * 1.5);
+    background-color: var(--navigation-background);
 }
 
 #sub-menu-container {
@@ -182,47 +183,59 @@ nav .menu-item:nth-of-type(4):hover ~ #sub-menu-container #sub-menu-holder {
 }
 
 /* Menu specific */
-.menu-item .title {
-    font-weight: 500;
-    color: rgb(44 70 86);
-    margin: 0 0 0.25em 0;
-}
+.menu-item {
+    color: var(--primary-foreground);
 
-.menu-item .icon-box * {
-    transition: all 0.1s ease-out;
-    position: relative;
-}
-.menu-item .icon-box.space {
-    margin-bottom: 1.25em;
-}
-.menu-item .icon-box.flat {height: 1.5em;margin-bottom: 0.5em;}
-.menu-item .icon, .menu-item .text {
-    float: left;
-    color: #9ea9af;
-}
+    & * {
+        color: var(--primary-foreground);
+    }
 
-.menu-item .icon {
-    color: rgb(44 70 86);
-    font-size: 1.25em;
-    margin: 0 1em 0 0;
-}
-.menu-item .icon-box {
-    cursor: pointer;
-}
-.menu-item .icon-box {
-    float: left;
-    width: 100%;
-    margin: 0;
-    height: 4em;
-    row-gap: 0;
-    line-height: 1em;
-}
+    & .title {
+        font-weight: 500;
+        margin: 0 0 0.25em 0;
+    }
 
-.menu-item .icon-box .text i {
-    clip-path: inset(0 100% 0 0);
-    font-size: 0.75em;
-    position: relative;
-    top: -1px;
+    & .icon-box {
+        & * {
+            transition: all 0.1s ease-out;
+            position: relative;
+        }
+
+        &.space {
+            margin-bottom: 1.25em;
+        }
+
+        &.flat {
+            height: 1.5em;
+            margin-bottom: 0.5em;
+        }
+    }
+
+    & :is(.icon, .text) {
+        float: left;
+    }
+
+    & .icon {
+        font-size: 1.25em;
+        margin: 0 1em 0 0;
+    }
+
+    & .icon-box {
+        cursor: pointer;
+        float: left;
+        width: 100%;
+        margin: 0;
+        height: 4em;
+        row-gap: 0;
+        line-height: 1em;
+
+        & .text i {
+            clip-path: inset(0 100% 0 0);
+            font-size: 0.75em;
+            position: relative;
+            top: -1px;
+        }
+    }
 }
 
 /* Base Icon Style */
@@ -267,7 +280,6 @@ nav .menu-item:nth-of-type(3).highlight:hover ~ #sub-menu-container #sub-menu-ho
 .bottom-container {
     grid-area: 4 / -3 / 4 / 3;
     padding-top: 1.5em;
-    color: #3a5260;
     font-weight: 500;
 }
 
@@ -287,17 +299,16 @@ nav .menu-item:nth-of-type(3).highlight:hover ~ #sub-menu-container #sub-menu-ho
     text-decoration: none;
     right: 1.5em;
     bottom: 1.5em;
-}
 
-.bottom-container a:hover {
-    background: linear-gradient(90deg, #8ea4b136, #a3b5bf33);
+    &:hover {
+        background: linear-gradient(90deg, #8ea4b136, #a3b5bf33);
+    }
 }
 
 .sub-menu h3 {
     font-size: 1em;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: rgb(44 70 86 / 68%);
     margin: 0.75em 0;
 }
 
@@ -306,7 +317,6 @@ nav .menu-item:nth-of-type(3).highlight:hover ~ #sub-menu-container #sub-menu-ho
     float: left;
     font-size: 1em;
     line-height: 1.75em;
-    color: #7a8a94;
     text-decoration: none;
 }
 
@@ -334,7 +344,6 @@ nav .menu-item.highlight:hover ~ #sub-menu-container #sub-menu-holder #sub-menu-
     list-style: none;
 }
 #info-box a {
-    color: white;
     text-decoration: none;
     text-align: right;
     padding: 0.5em 0;

@@ -31,43 +31,6 @@ function createData() {
 
 }
 
-/**
- * 
- * @param {SongModel} data 
- */
-function createSongListEntry(data) {
-    const {id, name, songGenerations} = data;
-
-    const entry = document.createElement("div");
-    entry.id = id;
-    entry.classList.add("entry-list-item")
-
-    const fig = document.createElement("figure");
-    const cnv = document.createElement("canvas");
-    fig.appendChild(cnv);
-
-    entry.appendChild(fig);
-
-    const metaData = document.createElement("div");
-    metaData.classList.add("entry-meta");
-    
-    const entryName = document.createElement("span");
-    entryName.textContent = name;
-    metaData.appendChild(entryName);
-
-    entry.appendChild(metaData);
-
-    const actionBar = document.createElement("div");
-    actionBar.classList.add("action-bar");
-
-    const editButton = document.createElement("button");
-    editButton.classList.add("button", "button-edit");
-    actionBar.appendChild(editButton);
-
-    entry.appendChild(actionBar);
-    return entry;
-}
-
 document.addEventListener("DOMContentLoaded", (e) => {
     const tbl = document.querySelector("#song-table .table-body");
     if (!!tbl) {
@@ -82,8 +45,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
                         tblRow.classList.add("table-row");
                         
                         const tblItem = document.createElement("div");
-                        tblItem.classList.add("table-row-item");                
-                        tblItem.appendChild(createSongListEntry(save));
+                        tblItem.classList.add("table-row-item");
+                        
+                        const listElement = document.createElement("song-table-list-entry");
+                        listElement.setAttribute("data-song", JSON.stringify(save));
+
+                        tblItem.appendChild(listElement);
                         tblRow.appendChild(tblItem);
                         
                         tbl.appendChild(tblRow);
