@@ -3,6 +3,8 @@ class SongTableListEntry extends HTMLElement {
 
     constructor() {
         super();
+
+        this._internals = this.attachInternals();
     }
 
     connectedCallback() {
@@ -45,6 +47,22 @@ class SongTableListEntry extends HTMLElement {
     attributeChangedCallback(name, oldValue, newValue) {
         console.log(`Attribute ${name} has changed from ${oldValue} to ${newValue}.`);
     }
+
+    get finished() {
+        return this._internals.states.has("finished");
+    }
+
+    set finished(flag) {
+        if (flag) {
+            this._internals.states.add("finished");
+        } else {
+            this._internals.states.delete("finished");
+        }
+    }
+
+    static isStateSyntaxSupported() {
+        return CSS.supports("selector(:state(finished))");
+      }
 }
 
 export default SongTableListEntry;

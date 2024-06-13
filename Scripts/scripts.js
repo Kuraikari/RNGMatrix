@@ -1,9 +1,4 @@
-/**
- * @typedef SongModel
- * @property {string} id
- * @property {string} name
- * @property {Array<object>} songGenerations
- */
+import * as SongModel from "./models/SongModel.js";
 
 /**
  * 
@@ -36,7 +31,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     if (!!tbl) {
         fetchData()
             .then((data) => data.data)
-            .then((saves) => {
+            .then((/** * @type {Array<SongModel>}  */ saves) => {
                 if (Array.isArray(saves)) {
                     saves.forEach((save) => {
                         console.debug(save);
@@ -49,6 +44,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
                         
                         const listElement = document.createElement("song-table-list-entry");
                         listElement.setAttribute("data-song", JSON.stringify(save));
+                        listElement.finished = save
 
                         tblItem.appendChild(listElement);
                         tblRow.appendChild(tblItem);

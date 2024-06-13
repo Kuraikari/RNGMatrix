@@ -1,5 +1,5 @@
-const SongGenerationModel = require("./SongGenerationModel");
-const random = require("../app/server/utils/random");
+import SongGenerationModel from "./SongGenerationModel.js";
+import { getRandomString } from "./../utils/random.js";
 
 /**
  * Model class for udio generations
@@ -21,7 +21,7 @@ class SongModel {
     isFinished  = false;
 
     constructor() {
-        this.name   = random.getRandomString(10);
+        this.name   = getRandomString(10);
         this.id     = this.returnId();
     }
 
@@ -35,4 +35,4 @@ class SongModel {
     }
 }
 
-module.exports = SongModel;
+export default SongModel;
