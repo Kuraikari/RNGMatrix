@@ -1,22 +1,31 @@
 <form action="http://localhost:3000/song" method="post">
-        <h1>Song Model</h1>
+        <h2>Song Model</h2>
         
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="{{ songModel.name }}" required><br>
+        <div class="input-wrapper text-input">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="{{ songModel.name }}" required><br>
+        </div>
 
-        <label for="description">Description:</label>
-        <textarea id="description" name="description">{{ songModel.description }}</textarea><br>
+        <div class="input-wrapper textarea-input">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description">{{ songModel.description }}</textarea><br>
+        </div>
 
-        <label for="fullLyrics">Full Lyrics:</label>
-        <textarea id="fullLyrics" name="fullLyrics">{{ songModel.fullLyrics }}</textarea><br>
+        <div class="input-wrapper textarea-input">    
+            <label for="fullLyrics">Full Lyrics:</label>
+            <textarea id="fullLyrics" name="fullLyrics">{{ songModel.fullLyrics }}</textarea><br>
+        </div>
 
-        <label for="isFinished">Is Finished:</label>
-        <input type="checkbox" id="isFinished" name="isFinished" {% if songModel.isFinished %}checked{% endif %}><br>
+        <div class="input-wrapper checkbox-input">
+            <label for="isFinished">Is Finished:</label>
+            <input type="checkbox" id="isFinished" name="isFinished" {% if songModel.isFinished %}checked{% endif %}><br>
+        </div>
 
-        <h2>Song Generations</h2>
+        <h3>Song Generations</h3>
         {% for generation in songModel.songGenerations %}
         <fieldset>
             <legend>Song Generation {{ loop.index }}</legend>
+
             <label for="prompt_{{ loop.index }}">Prompt:</label>
             <input type="text" id="prompt_{{ loop.index }}" name="songGenerations[{{ loop.index }}][prompt]" value="{{ generation.prompt }}"><br>
 
@@ -48,5 +57,8 @@
         </fieldset>
         {% endfor %}
 
-        <button type="submit">Submit</button>
+        <div class="input-wrapper submit-input">
+            <i class="icon icon-checkmark"></i>
+            <input class="" type="submit" value="Submit" >
+        </div>
     </form>

@@ -3,6 +3,28 @@ input {
     border: 1px solid var(--input-border-color);
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+
+    & .input-wrapper:not(.submit-input) {
+        display: grid;
+        grid-template-columns: 10rem 1fr;
+        border: none;
+        max-width: 100%;
+        
+        & label {
+            & + :is(input[type="text"], textarea) {
+                width: 100%;
+            }
+
+            & + input[type="checkbox"] {
+                justify-self: flex-start;
+            }
+        }
+    }
+}
+
 .input-wrapper {
     --font-size: 16px;
     position: relative;
@@ -51,7 +73,7 @@ input {
     &:hover,
     &:focus-within {
         &::before {
-            background-color: #6466fe;
+            background-color: var(--accent-color);
             color: white;
         }
     }
@@ -81,8 +103,31 @@ input {
     &:hover,
     &:focus-within {
         &::before {
-            background-color: #6466fe;
+            background-color: var(--accent-color);
             color: white;
         }
+    }
+}
+
+.submit-input:has(> input[type="submit"]) {
+    border: none;
+    background-color: var(--accent-color);
+    border: var(--primary-foreground);
+    color: var(--primary-foreground);
+    padding: var(--padding-min) var(--padding-med);
+    transition: all .2s ease;
+
+    &:hover {
+        background-color: var(--accent-color-hover);
+    }
+
+    &:hover, &:hover > * {
+        cursor: pointer;
+    }
+
+    & input {
+        background-color: transparent;
+        color: var(--primary-foreground);
+        border: none;
     }
 }

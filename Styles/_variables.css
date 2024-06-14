@@ -1,6 +1,7 @@
 :root {
     /* Colors */
     --accent-color: #6466FE;
+    --accent-color-hover: #4e51eb;
     --gray-medium: #0F0F0F;
     --primary: #000;
     --primary-foreground: #FFF;
