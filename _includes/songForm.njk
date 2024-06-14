@@ -1,0 +1,52 @@
+<form action="http://localhost:3000/song" method="post">
+        <h1>Song Model</h1>
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ songModel.name }}" required><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description">{{ songModel.description }}</textarea><br>
+
+        <label for="fullLyrics">Full Lyrics:</label>
+        <textarea id="fullLyrics" name="fullLyrics">{{ songModel.fullLyrics }}</textarea><br>
+
+        <label for="isFinished">Is Finished:</label>
+        <input type="checkbox" id="isFinished" name="isFinished" {% if songModel.isFinished %}checked{% endif %}><br>
+
+        <h2>Song Generations</h2>
+        {% for generation in songModel.songGenerations %}
+        <fieldset>
+            <legend>Song Generation {{ loop.index }}</legend>
+            <label for="prompt_{{ loop.index }}">Prompt:</label>
+            <input type="text" id="prompt_{{ loop.index }}" name="songGenerations[{{ loop.index }}][prompt]" value="{{ generation.prompt }}"><br>
+
+            <label for="lyrics_{{ loop.index }}">Lyrics:</label>
+            <textarea id="lyrics_{{ loop.index }}" name="songGenerations[{{ loop.index }}][lyrics]">{{ generation.lyrics }}</textarea><br>
+
+            <label for="seed_{{ loop.index }}">Seed:</label>
+            <input type="number" id="seed_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][seed]" value="{{ generation.advancedSettings.seed }}"><br>
+
+            <label for="promptStrength_{{ loop.index }}">Prompt Strength:</label>
+            <input type="range" id="promptStrength_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][promptStrength]" min="0" max="1" step="0.1" value="{{ generation.advancedSettings.promptStrength }}"><br>
+
+            <label for="lyricsStrength_{{ loop.index }}">Lyrics Strength:</label>
+            <input type="range" id="lyricsStrength_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][lyricsStrength]" min="0" max="1" step="0.1" value="{{ generation.advancedSettings.lyricsStrength }}"><br>
+
+            <label for="clipStart_{{ loop.index }}">Clip Start:</label>
+            <input type="number" id="clipStart_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][clipStart]" value="{{ generation.advancedSettings.clipStart }}"><br>
+
+            <label for="contextWindow_{{ loop.index }}">Context Window:</label>
+            <input type="number" id="contextWindow_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][contextWindow]" value="{{ generation.advancedSettings.contextWindow }}"><br>
+
+            <label for="quality_{{ loop.index }}">Quality:</label>
+            <select id="quality_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][quality]">
+                <option value="Fastest" {% if generation.advancedSettings.quality == 'Fastest' %}selected{% endif %}>Fastest</option>
+                <option value="Fast" {% if generation.advancedSettings.quality == 'Fast' %}selected{% endif %}>Fast</option>
+                <option value="High" {% if generation.advancedSettings.quality == 'High' %}selected{% endif %}>High</option>
+                <option value="Ultra" {% if generation.advancedSettings.quality == 'Ultra' %}selected{% endif %}>Ultra</option>
+            </select><br>
+        </fieldset>
+        {% endfor %}
+
+        <button type="submit">Submit</button>
+    </form>
