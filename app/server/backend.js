@@ -46,41 +46,45 @@ backendRouter.get("/songs", function(req, res) {
     .catch(reason => res.send(reason));
 });
 
-backendRouter.get("/song/:id", function(req, res) {
+backendRouter.post("/song/:id", function(req, res) {
     LoadJSONFiles()
     .then((resp) => resp)
     .then((data) => {
-        console.debug(data);
-        res.send({ data });
+        if (Array.isArray(data)){
+            const song = data.filter((d) => parseInt(req.params.id) === d.id).at(-1);
+            console.debug(song);
+            res.send({ song });
+        }
     })
     .catch(reason => res.send(reason));
 });
 
 backendRouter.post("/song", function(req, res) {
     try {
-       const {data} = req.body;
+       const { data } = req.body;
        const SongModel = require("../../Models/SongModel.js").default;
        const defaultSong = new SongModel();
-       defaultSong.name
+       console.debug(data);
 
-       CreateJSONFile(defaultSong)
-        .then((resp) => resp)
-        .then((data) => {
-            res.send({ data });
-        })
-        .catch(reason => res.send(reason));
+    //    CreateJSONFile(defaultSong)
+    //     .then((resp) => resp)
+    //     .then((data) => {
+    //         res.send({ data });
+    //     })
+    //     .catch(reason => res.send(reason));
 
     } catch (error) {
-        const SongModel = require("../../Models/SongModel.js").default;
-        const defaultSong = new SongModel();
-        defaultSong.id = Number.parseInt(Math.random()*100);
+        console.error(error);
+        // const SongModel = require("../../Models/SongModel.js").default;
+        // const defaultSong = new SongModel();
+        // defaultSong.id = Number.parseInt(Math.random()*10000);
 
-        CreateJSONFile(defaultSong)
-        .then((resp) => resp)
-        .then((data) => {
-            res.send({ data });
-        })
-        .catch(reason => res.send(reason));
+        // CreateJSONFile(defaultSong)
+        // .then((resp) => resp)
+        // .then((data) => {
+        //     res.send({ data });
+        // })
+        // .catch(reason => res.send(reason));
     }
     
 });
