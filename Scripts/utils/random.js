@@ -15,7 +15,7 @@ function getRandomString(len) {
     return result;
 }
 
-export default {
+export {
     getRandomString,
     getChar,
     getRandomInt

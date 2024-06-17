@@ -24,8 +24,7 @@ async function loadJson() {
         const files = await Promise.all(fileNames.map(async (fn) => {
             const data = await readFile(`${path}/${fn}`, { encoding: 'utf8'});
             return JSON.parse(data);
-        })); 
-        console.debug(files);
+        }));
         return files;
     } catch (e) {
         console.error(e);

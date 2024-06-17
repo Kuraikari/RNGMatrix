@@ -1,5 +1,5 @@
 import SongGenerationModel from "./SongGenerationModel.js";
-import getRandomString from "../utils/random.js";
+import { getRandomString } from "../utils/random.js";
 
 /**
  * Model class for udio generations
@@ -26,7 +26,7 @@ class SongModel {
     }
 
     returnId() {
-        var res = this.name;
+        var res = this.name.trim().replace(/[\:\s]{1,}/gmi, "_").toLocaleLowerCase();
         if (this.isChild) {
             res = `${res} - ${this.parentSong.id}`;
         }

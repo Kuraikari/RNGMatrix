@@ -1,61 +1,112 @@
-<form action="http://localhost:3000/song" method="post">
+<form action="http://localhost:3000/api/song" method="post">
         <h2>Song Model</h2>
         
         <div class="input-wrapper text-input">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="{{ songModel.name }}" required><br>
+            <input type="text" id="name" name="name" value="{{ songModel.name }}" required>
         </div>
 
         <div class="input-wrapper textarea-input">
             <label for="description">Description:</label>
-            <textarea id="description" name="description">{{ songModel.description }}</textarea><br>
+            <textarea id="description" name="description">{{ songModel.description }}</textarea>
         </div>
 
         <div class="input-wrapper textarea-input">    
             <label for="fullLyrics">Full Lyrics:</label>
-            <textarea id="fullLyrics" name="fullLyrics">{{ songModel.fullLyrics }}</textarea><br>
+            <textarea id="fullLyrics" name="fullLyrics">{{ songModel.fullLyrics }}</textarea>
         </div>
 
         <div class="input-wrapper checkbox-input">
             <label for="isFinished">Is Finished:</label>
-            <input type="checkbox" id="isFinished" name="isFinished" {% if songModel.isFinished %}checked{% endif %}><br>
+            <input type="checkbox" id="isFinished" name="isFinished" {% if songModel.isFinished %}checked{% endif %}>
         </div>
 
         <h3>Song Generations</h3>
-        {% for generation in songModel.songGenerations %}
-        <fieldset>
-            <legend>Song Generation {{ loop.index }}</legend>
+        {% if generation.songGenerations|length  %}
+            {% for generation in songModel.songGenerations %}
+                <fieldset>
+                    <legend>Song Generation {{ loop.index }}</legend>
 
-            <label for="prompt_{{ loop.index }}">Prompt:</label>
-            <input type="text" id="prompt_{{ loop.index }}" name="songGenerations[{{ loop.index }}][prompt]" value="{{ generation.prompt }}"><br>
+                    <label for="prompt_{{ loop.index }}">Prompt:</label>
+                    <input type="text" id="prompt_{{ loop.index }}" name="songGenerations[{{ loop.index }}][prompt]" value="{{ generation.prompt }}"><br>
 
-            <label for="lyrics_{{ loop.index }}">Lyrics:</label>
-            <textarea id="lyrics_{{ loop.index }}" name="songGenerations[{{ loop.index }}][lyrics]">{{ generation.lyrics }}</textarea><br>
+                    <label for="lyrics_{{ loop.index }}">Lyrics:</label>
+                    <textarea id="lyrics_{{ loop.index }}" name="songGenerations[{{ loop.index }}][lyrics]">{{ generation.lyrics }}</textarea><br>
 
-            <label for="seed_{{ loop.index }}">Seed:</label>
-            <input type="number" id="seed_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][seed]" value="{{ generation.advancedSettings.seed }}"><br>
+                    <label for="seed_{{ loop.index }}">Seed:</label>
+                    <input type="number" id="seed_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][seed]" value="{{ generation.advancedSettings.seed }}"><br>
 
-            <label for="promptStrength_{{ loop.index }}">Prompt Strength:</label>
-            <input type="range" id="promptStrength_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][promptStrength]" min="0" max="1" step="0.1" value="{{ generation.advancedSettings.promptStrength }}"><br>
+                    <label for="promptStrength_{{ loop.index }}">Prompt Strength:</label>
+                    <input type="range" id="promptStrength_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][promptStrength]" min="0" max="1" step="0.1" value="{{ generation.advancedSettings.promptStrength }}"><br>
 
-            <label for="lyricsStrength_{{ loop.index }}">Lyrics Strength:</label>
-            <input type="range" id="lyricsStrength_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][lyricsStrength]" min="0" max="1" step="0.1" value="{{ generation.advancedSettings.lyricsStrength }}"><br>
+                    <label for="lyricsStrength_{{ loop.index }}">Lyrics Strength:</label>
+                    <input type="range" id="lyricsStrength_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][lyricsStrength]" min="0" max="1" step="0.1" value="{{ generation.advancedSettings.lyricsStrength }}"><br>
 
-            <label for="clipStart_{{ loop.index }}">Clip Start:</label>
-            <input type="number" id="clipStart_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][clipStart]" value="{{ generation.advancedSettings.clipStart }}"><br>
+                    <label for="clipStart_{{ loop.index }}">Clip Start:</label>
+                    <input type="number" id="clipStart_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][clipStart]" value="{{ generation.advancedSettings.clipStart }}"><br>
 
-            <label for="contextWindow_{{ loop.index }}">Context Window:</label>
-            <input type="number" id="contextWindow_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][contextWindow]" value="{{ generation.advancedSettings.contextWindow }}"><br>
+                    <label for="contextWindow_{{ loop.index }}">Context Window:</label>
+                    <input type="number" id="contextWindow_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][contextWindow]" value="{{ generation.advancedSettings.contextWindow }}"><br>
 
-            <label for="quality_{{ loop.index }}">Quality:</label>
-            <select id="quality_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][quality]">
-                <option value="Fastest" {% if generation.advancedSettings.quality == 'Fastest' %}selected{% endif %}>Fastest</option>
-                <option value="Fast" {% if generation.advancedSettings.quality == 'Fast' %}selected{% endif %}>Fast</option>
-                <option value="High" {% if generation.advancedSettings.quality == 'High' %}selected{% endif %}>High</option>
-                <option value="Ultra" {% if generation.advancedSettings.quality == 'Ultra' %}selected{% endif %}>Ultra</option>
-            </select><br>
-        </fieldset>
-        {% endfor %}
+                    <label for="quality_{{ loop.index }}">Quality:</label>
+                    <select id="quality_{{ loop.index }}" name="songGenerations[{{ loop.index }}][advancedSettings][quality]">
+                        <option value="Fastest" {% if generation.advancedSettings.quality == 'Fastest' %}selected{% endif %}>Fastest</option>
+                        <option value="Fast" {% if generation.advancedSettings.quality == 'Fast' %}selected{% endif %}>Fast</option>
+                        <option value="High" {% if generation.advancedSettings.quality == 'High' %}selected{% endif %}>High</option>
+                        <option value="Ultra" {% if generation.advancedSettings.quality == 'Ultra' %}selected{% endif %}>Ultra</option>
+                    </select><br>
+                </fieldset>
+            {% endfor %}
+        {% else %}
+            <fieldset>
+                <legend>Song Generation</legend>
+
+                <div class="input-wrapper text-input">
+                    <label for="prompt">Prompt:</label>
+                    <input type="text" id="prompt" name="songGenerations[0][prompt]" value="{{ generation.prompt }}">
+                </div>
+
+                <div class="input-wrapper textarea-input">
+                    <label for="lyrics">Lyrics:</label>
+                    <textarea id="lyrics" name="songGenerations[0][lyrics]">{{ generation.lyrics }}</textarea>
+                </div>
+
+                <div class="input-wrapper number-input">
+                    <label for="seed">Seed:</label>
+                    <input type="number" id="seed" name="songGenerations[0][advancedSettings][seed]" value="{{ generation.advancedSettings.seed }}">
+                </div>
+
+                <div class="input-wrapper range-input">
+                    <label for="promptStrength">Prompt Strength:</label>
+                    <input type="range" id="promptStrength" name="songGenerations[0][advancedSettings][promptStrength]" min="0" max="1" step="0.01" value="{{ generation.advancedSettings.promptStrength }}">
+                </div>
+
+                <div class="input-wrapper range-input">
+                    <label for="lyricsStrength">Lyrics Strength:</label>
+                    <input type="range" id="lyricsStrength" name="songGenerations[0][advancedSettings][lyricsStrength]" min="0" max="1" step="0.01" value="{{ generation.advancedSettings.lyricsStrength }}">
+                </div>
+
+                <div class="input-wrapper range-input">
+                    <label for="clipStart">Clip Start:</label>
+                    <input type="range" id="clipStart" name="songGenerations[0][advancedSettings][clipStart]" min="0" max="1" step="0.01" value="{{ generation.advancedSettings.clipStart }}">
+                </div>
+
+                <div class="input-wrapper range-input">
+                    <label for="contextWindow">Context Window:</label>
+                    <input type="range" id="contextWindow" name="songGenerations[0][advancedSettings][contextWindow]" min="1" max="130" step="1" value="{{ generation.advancedSettings.contextWindow }}">
+                </div>
+
+                <div class="input-wrapper select-input">
+                    <label for="quality">Quality:</label>
+                    <select id="quality" name="songGenerations[0][advancedSettings][quality]">
+                        <option value="Fastest" {% if generation.advancedSettings.quality == 'Fastest' %}selected{% endif %}>Fastest</option>
+                        <option value="Fast" {% if generation.advancedSettings.quality == 'Fast' %}selected{% endif %}>Fast</option>
+                        <option value="High" {% if generation.advancedSettings.quality == 'High' %}selected{% endif %}>High</option>
+                        <option value="Ultra" {% if generation.advancedSettings.quality == 'Ultra' %}selected{% endif %}>Ultra</option>
+                    </select>
+                </div>
+            </fieldset>
+        {% endif %}
 
         <div class="input-wrapper submit-input">
             <i class="icon icon-checkmark"></i>

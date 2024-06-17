@@ -32,14 +32,19 @@ frontendRouter.get('/', (req, res) => {
 
 frontendRouter.get('/song', (req, res) => {
 	res.render('song/index.html')
-})
+});
 
-frontendRouter.get('/song/:id', (req, res) => {
-	res.render('song/index.html', {
-		root: './_site',
-		data: fetchData(req.params.id)
+frontendRouter.get('/song/:id', async (req, res) => {
+	fetchData(req.params.id)
+	.then(data => data)
+	.then((song)=> {
+		console.debug(song);
+		res.render('song/index.html', {
+			song,
+		});
 	})
-})
+	.catch(reason => res.send(reason));
+});
 
 frontend.use('/', frontendRouter);
 

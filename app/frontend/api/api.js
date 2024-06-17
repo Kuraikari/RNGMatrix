@@ -23,7 +23,6 @@ async function createData(data) {
 
 /**
  * Fetches data from the backend using the api for retrieving songs.
- * @returns {string} json of retrieved songs
  */
 async function fetchData(id) {
     try {
