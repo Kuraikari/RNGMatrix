@@ -15,6 +15,14 @@
 
     --navigation-background: #2A2A2A;
 
+    /* Colors - Action-Bar */
+    --edit-color: #6466FE;
+    --edit-color-hover: #4e51eb;
+    --delete-color: #e62d2d;
+    --delete-color-hover: #be1d1d;
+    --bookmark-color: #21a84a;
+    --bookmark-color-hover: #138034;
+
     /* Paddings */
     --padding-min: 6px;
     --padding-med: 12px;

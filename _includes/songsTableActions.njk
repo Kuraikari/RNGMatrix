@@ -1,0 +1,7 @@
+{% macro events(editEvent, deleteEvent, bookmarkEvent) %}
+    <div class="action-bar">
+        <a class="button button-edit" href="{{ editEvent }}">Edit</a>
+        <a class="button button-delete" href="{{ deleteEvent }}">Delete</a>
+        <a class="button button-bookmark" href="{{ bookmarkEvent }}">Bookmark</a>
+    </div>
+{% endmacro %}

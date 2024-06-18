@@ -50,33 +50,5 @@ async function createData(data) {
 }
 
 document.addEventListener("DOMContentLoaded", (e) => {
-    const tbl = document.querySelector("#song-table .table-body");
-    if (!!tbl) {
-        fetchData()
-            .then((data) => data.data)
-            .then((/** * @type {Array<SongModel>}  */ saves) => {
-                if (Array.isArray(saves)) {
-                    saves.forEach((save) => {
-                        console.debug(save);
-
-                        const tblRow = document.createElement("div");
-                        tblRow.classList.add("table-row");
-                        
-                        const tblItem = document.createElement("div");
-                        tblItem.classList.add("table-row-item");
-                        
-                        const listElement = document.createElement("song-table-list-entry");
-                        listElement.setAttribute("data-song", JSON.stringify(save));
-                        listElement.finished = save
-
-                        tblItem.appendChild(listElement);
-                        tblRow.appendChild(tblItem);
-                        
-                        tbl.appendChild(tblRow);
-
-                        return tbl;
-                    });
-                }
-            });
-    }
+    
 });

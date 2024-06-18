@@ -5,10 +5,21 @@
         </div>
     </div>
     <div class="table-body">
-        <template>
-            <div class="table-row">
-                <div class="table-row-item"></div>
+        {% for song in songModel | list %}
+            <div class="table-row" id="table-row-{{loop.index}}">
+                <div class="table-row-item">
+                    <div class="song-table-list-entry">
+                        <div id="{{ song.id }}" class="entry-list-item">
+                            <figure><canvas></canvas></figure>
+                            <div class="entry-meta">
+                                <span>{{ song.name }}</span>
+                            </div>
+                            {% import "songsTableActions.njk" as actions %}
+                            {{ actions.events("http://localhost:3001/song/" + song.id, "", "") }}
+                        </div>
+                    </div>
+                </div>
             </div>
-        </template>
+        {% endfor %}
     </div>
 </div>

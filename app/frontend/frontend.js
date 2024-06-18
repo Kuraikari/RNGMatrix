@@ -27,7 +27,11 @@ var env = nunjucks.configure(['views', '_includes'], {
 });
 
 frontendRouter.get('/', (req, res) => {
-	res.render('home/index.njk');
+	fetchData(null)
+	.then(data => data)
+	.then((songModel)=> {
+		res.render('home/index.njk', { songModel: songModel.data });
+	})
  });
 
 frontendRouter.get('/song', (req, res) => {

@@ -26,14 +26,25 @@ async function createData(data) {
  */
 async function fetchData(id) {
     try {
-        const re = await fetch(`http://localhost:3000/api/song/${id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/josn; charset=utf-8',
-            },
-            body: JSON.stringify({id})
-        });
-        return re.json();
+
+        if (!id) {
+            const re = await fetch(`http://localhost:3000/api/songs/`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                }
+            });
+            return re.json();
+        } else {
+            const re = await fetch(`http://localhost:3000/api/song/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                },
+                body: JSON.stringify({id})
+            });
+            return re.json();
+        }
     } catch (error) {
         console.error(error);
     }

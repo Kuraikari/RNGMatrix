@@ -1,6 +1,5 @@
-
 {% set layout = "baseLayout.njk" %}
-{% set title = RNGMatrix %}
+{% set title = "RNGMatrix" %}
 {% set cssFile = "base.css" %}
 {% set permalink = "index.html" %}
 
@@ -29,6 +28,7 @@
                             With the saved settings, you can always go back to udio and re-create or re-imagine the songs you liked the most.
                         </p>
                         <p>
+                            {% set songs = songModel %}
                             {% include "songsTable.njk" %}
                         </p>
                     </main>
