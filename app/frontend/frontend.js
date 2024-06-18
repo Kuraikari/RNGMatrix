@@ -3,7 +3,7 @@
  * FRONTEND
  */
 // call the packages we need
-import express, { Router, static as eStatic} from 'express';        // call express
+import express from 'express';        // call express
 import { join } from 'path';
 import * as url from 'url';
 import nunjucks from 'nunjucks';
@@ -14,34 +14,31 @@ const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 var frontend   = express();                 // define our app using express
-var frontendRouter = Router();              // get an instance of the express Router
+var frontendRouter = express.Router();              // get an instance of the express Router
 
-nunjucks.configure('_site', {
+frontend.use("/css", express.static(join('./_site/css')));
+frontend.use("/js", express.static(join('./_site/js')));
+frontend.set('view engine', 'njk');
+
+var env = nunjucks.configure(['views', '_includes'], {
 	autoescape: true,
-	express: frontend
+	express: frontend,
+	watch: true
 });
 
-frontend.use("/css", eStatic(join('./_site/css')));
-frontend.use("/js", eStatic(join('./_site/js')));
-frontend.set('views', __dirname + '/_site');
-frontend.set('view engine', 'html');
-
 frontendRouter.get('/', (req, res) => {
-	res.render('index.html');
+	res.render('home/index.njk');
  });
 
 frontendRouter.get('/song', (req, res) => {
-	res.render('song/index.html')
+	res.render('song/index.njk')
 });
 
 frontendRouter.get('/song/:id', async (req, res) => {
 	fetchData(req.params.id)
 	.then(data => data)
-	.then((song)=> {
-		console.debug(song);
-		res.render('song/index.html', {
-			song,
-		});
+	.then((songModel)=> {
+		res.render('song/index.njk', { songModel });
 	})
 	.catch(reason => res.send(reason));
 });

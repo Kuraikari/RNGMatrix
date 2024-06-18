@@ -1,17 +1,37 @@
----
-layout: baseLayout.njk
-title: RNGMatrix - Song
-cssFile: "base.css"
-permalink: "song/index.html"
----
-<section class="section medium">
-    <header>
-        <h1>{{ title }}</h1>
-    </header>
-    <main>
-        <p>
-            Here are all your songs you generated... As long as you documented them.
-        </p>
-        {% include "songForm.njk" %}
-    </main>
-</section>
+{% set layout = "baseLayout.njk" %}
+{% set title = "RNGMatrix - Song" %}
+{% set cssFile = "base.css" %}
+{% set permalink = "song/index.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ title }}</title>
+        {% block css %}
+            {% include "css.njk" %}
+        {% endblock %}  
+    </head>
+    <body>
+        {% block main %}
+            {% include "navbar_top.njk" %}
+            {% block content %}        
+                <section class="section medium">
+                    <header>
+                        <h1>{{ title }} - {{ songModel.name }} </h1>
+                    </header>
+                    <main>
+                        <p>
+                            Here are all your songs you generated... As long as you documented them.
+                        </p>
+                        {% set song = songModel %}
+                        {% include "songForm.njk"%}
+                    </main>
+                </section>
+            {% endblock content %}
+            {% include "footer.njk" %}
+        {% endblock %}
+        {% include "scripts.njk" %}
+    </body>
+</html>
