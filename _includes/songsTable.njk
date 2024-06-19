@@ -10,7 +10,9 @@
                 <div class="table-row-item">
                     <div class="song-table-list-entry">
                         <div id="{{ song.id }}" class="entry-list-item">
-                            <figure><canvas></canvas></figure>
+                            <figure>
+                                <canvas data-songname="{{song.name}}"></canvas>
+                            </figure>
                             <div class="entry-meta">
                                 <span>{{ song.name }}</span>
                             </div>
