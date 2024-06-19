@@ -1,7 +1,10 @@
 {% macro events(editEvent, deleteEvent, bookmarkEvent) %}
     <div class="action-bar">
-        <a class="button button-edit" href="{{ editEvent }}">Edit</a>
-        <a class="button button-delete" href="{{ deleteEvent }}">Delete</a>
-        <a class="button button-bookmark" href="{{ bookmarkEvent }}">Bookmark</a>
+        {% import "button.njk" as editButton %}
+        {{ editButton.settings("Edit", "edit", editEvent + song.id, "", true, "") }}
+        {% import "button.njk" as deleteButton %}
+        {{ deleteButton.settings("Delete", "delete", deleteEvent + song.id, "", true, "") }}
+        {% import "button.njk" as bookmarkButton %}
+        {{ bookmarkButton.settings("Bookmark", "bookmark", bookmarkEvent + song.id, "heart", true, "") }}
     </div>
 {% endmacro %}

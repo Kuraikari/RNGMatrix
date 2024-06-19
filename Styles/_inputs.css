@@ -132,7 +132,7 @@ form {
     }
 }
 
-.button {
+.button-input:has(> .button) {
     border: none;
     background-color: var(--accent-color);
     border: var(--primary-foreground);
@@ -141,7 +141,7 @@ form {
     border-radius: 4px;
     transition: all .2s ease;
 
-    &.button-edit {
+    &:has(> .button-edit) {
         background-color: var(--edit-color);
 
         &:hover {
@@ -149,7 +149,7 @@ form {
         }
     }
 
-    &.button-delete {
+    &:has(> .button-delete) {
         background-color: var(--delete-color);
 
         &:hover {
@@ -157,7 +157,7 @@ form {
         }
     }
 
-    &.button-bookmark {
+    &:has(> .button-bookmark) {
         background-color: var(--bookmark-color);
 
         &:hover {
@@ -173,9 +173,7 @@ form {
         cursor: pointer;
     }
 
-    & input {
-        background-color: transparent;
+    & .button {
         color: var(--primary-foreground);
-        border: none;
     }
 }
