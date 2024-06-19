@@ -22,4 +22,10 @@
             </div>
         {% endfor %}
     </div>
+    <div class="table-footer">
+        <div class="table-footer-action">
+            {% import "button.njk" as footerAction %}
+            {{ footerAction.settings("Add new song", "add-song", "http://localhost:3001/song/", "plus")}}
+        </div>
+    </div>
 </div>
