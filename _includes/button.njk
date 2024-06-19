@@ -1,15 +1,19 @@
 {% macro settings(text="Button", class="", onClick="#", prefixIcon="", isLink=true, suffixIcon="") %}
     <div class="input-wrapper button-input">
-        {% if prefixIcon | length %}
-            <i class="icon icon-{{prefixIcon}}"></i>
-        {% endif %}
         {% if isLink %}
-            <a class="button button-{{class}}" href="{{ onClick }}">{{text}}</a>
+            <a class="button button-{{class}}" href="{{ onClick }}">
+                {% if prefixIcon | length %}
+                    <i class="icon icon-{{prefixIcon}}"></i>
+                {% endif %}
+                {{text}}
+                {% if suffixIcon | length %}
+                    <i class="icon icon-{{suffixIcon}}"></i>
+                {% endif %}
+            </a>
         {% else %}
-            <button class="button button-{{class}}" onClick="{{ onClick }}">{{text}}</a>
-        {% endif %}
-        {% if suffixIcon | length %}
-            <i class="icon icon-{{suffixIcon}}"></i>
+            <button class="button button-{{class}}" onClick="{{ onClick }}">
+                {{text}}
+            </button>
         {% endif %}
     </div>
 {% endmacro %}
