@@ -27,6 +27,17 @@
                             It is used to store any settings for your udio songs.<br>
                             With the saved settings, you can always go back to udio and re-create or re-imagine the songs you liked the most.
                         </p>
+                        {% import "triangle.njk" as triangleUp %}
+                        {{ triangleUp.shape("up", "red")}}
+
+                        {% import "triangle.njk" as triangleLeft %}
+                        {{ triangleLeft.shape("left", "green")}}
+
+                        {% import "triangle.njk" as triangleDown %}
+                        {{ triangleDown.shape("down", "blue")}}
+
+                        {% import "triangle.njk" as triangleRight %}
+                        {{ triangleRight.shape("right", "orange")}}
                         <p>
                             {% set songs = songModel %}
                             {% include "songsTable.njk" %}

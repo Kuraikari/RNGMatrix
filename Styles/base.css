@@ -1,6 +1,7 @@
 @import "_reset.css";
 @import "icomoon-v1.0/style.css";
 @import "_variables.css";
+@import "_animations.css";
 @import "_inputs.css";
 @import "_components.css";
 @import "_nav.css";
@@ -105,3 +106,44 @@ figure:has(> canvas:empty) {
     }
 }
 
+.icon {
+    &.icon-triangle-up {
+        clip-path: var(--triangle-up-shape);
+        aspect-ratio: var(--triangle-up-ratio);
+        height: 0;
+        width: 0;
+        display: block;
+
+        &.negate {
+            transform: scaleY(-1);
+        }
+    }
+
+    &.icon-triangle-left {
+        clip-path: var(--triangle-left-shape);
+        aspect-ratio: var(--triangle-left-ratio);
+        height: 0;
+        width: 0;
+        display: block;
+
+        &.negate {
+            transform: scaleX(-1);
+        }
+    }
+
+    &.red {
+        background-color: red;
+    }
+
+    &.blue {
+        background-color: blue;
+    }
+
+    &.green {
+        background-color: green;
+    }
+
+    &.orange {
+        background-color: orange;
+    }
+}
