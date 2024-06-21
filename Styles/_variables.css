@@ -50,7 +50,4 @@
     --triangle-up-ratio: 1/cos(30deg);
     --triangle-left-shape: polygon(100% 0, 100% 100%, 0 50%);
     --triangle-left-ratio: 1/2;
-
-    --arrow-left-shape-open: polygon(48% 11%, 48% 30%, 100% 30%, 100% 70%, 48% 70%, 48% 89%, 0% 50%);
-    --arrow-left-shape-closed: polygon(0 0, 50% 0, 100% 0, 100% 100%, 50% 100%, 0 100%, 0% 50%);
 }
