@@ -1,4 +1,18 @@
 /**
+ * Fetches the current status of the backend
+ * @returns json of retrieved status message
+ */
+async function fetchStatus() {
+    try {
+        const re = await fetch("http://localhost:3000/api/status");
+        return re.json();
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+/**
  * 
  * @param {SongModel} data Model for the song data
  * @returns {string} the response as a json string
@@ -51,6 +65,7 @@ async function fetchData(id) {
 }
 
 export {
+    fetchStatus,
     fetchData,
     createData
 }
