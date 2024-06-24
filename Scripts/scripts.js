@@ -1,16 +1,22 @@
 /**
- * 
+ * Generates a new random string for the udio instrumental hack
  * @param {number} numChars 
  * @param {{usePnct: boolean, useSpecial: boolean, useRandAll: boolean}} settings 
  * @returns 
  */
 function generateRandomInstrumentalString(numChars, settings) {
+    /**
+     * Gets a random integer between a min and a max input
+     * @param {number} min 
+     * @param {number} max 
+     * @returns 
+     */
     function getRandomInt(min, max) {
         return Number.parseInt(Math.round(Math.random() * (max - min) + min));
     }
 
     /**
-     * 
+     * Shuffles the input array with the park-yates method
      * @param {Array<any>} arr 
      */
     function shuffle(arr) {
