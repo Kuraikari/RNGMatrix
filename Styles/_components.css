@@ -93,3 +93,26 @@
     width: calc(100% - (var(--padding-large) * 4));
     padding-inline: var(--padding-large);
 }
+
+.versus-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    position: relative;
+
+    & .versus-left {
+        clip-path: var(--versus-left-side);
+    }
+
+    & .versus-right {
+        clip-path: var(--versus-right-side);
+    }
+
+    > div:focus {
+        position: absolute;
+        width: 100%;
+        height: auto;
+        clip-path: var(--versus-revealed);
+    }
+}

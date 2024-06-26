@@ -1,0 +1,77 @@
+.icon.custom {
+    height: auto;
+    display: block;
+    transition: 0.35s cubic-bezier(0.72, 0.01, 0.36, 3.51);
+    background-color: black;
+
+    &.icon-triangle-up {
+        clip-path: var(--triangle-up-shape);
+        aspect-ratio: var(--triangle-up-ratio);
+        
+        &.negate {
+            transform: scaleY(-1);
+        }
+    }
+
+    &.icon-triangle-left {
+        clip-path: var(--triangle-left-shape);
+        aspect-ratio: var(--triangle-left-ratio);
+
+        &.negate {
+            transform: scaleX(-1);
+        }
+    }
+
+    &.icon-lock-animated {
+        width: 2rem;
+        aspect-ratio: var(--lock-ratio);
+
+        &.open {
+            clip-path: var(--lock-open-shape);
+        }
+
+        &.closed {
+            clip-path: var(--lock-closed-shape);
+        }
+    }
+
+    &.red {
+        background-color: red;
+    }
+
+    &.blue {
+        background-color: blue;
+    }
+
+    &.green {
+        background-color: green;
+    }
+
+    &.orange {
+        background-color: orange;
+    }
+}
+
+.input-wrapper:hover > .icon.custom {
+    &.icon-lock-animated {
+        &.open {
+            clip-path: var(--lock-closed-shape);
+        }
+
+        &.closed {
+            clip-path: var(--lock-open-shape);
+        }
+    }
+}
+
+.icon.custom {
+    &.icon-lock-animated:hover {
+        &.open {
+            clip-path: var(--lock-closed-shape);
+        }
+
+        &.closed {
+            clip-path: var(--lock-open-shape);
+        }
+    }
+}

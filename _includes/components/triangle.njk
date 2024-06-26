@@ -4,8 +4,8 @@
     {% endset %}
 
     {% if axis == "up" or axis == "down" %}
-        <i class="icon custom icon-triangle-up {{direction}} {{color}}" style="padding: calc({{size}}rem / 2)"></i>  
+        <i class="icon custom icon-triangle-up {{direction}} {{color}}" style="width: {{size}}rem"></i>  
     {% else %}
-        <i class="icon custom icon-triangle-left {{direction}} {{color}}" style="padding: calc({{size}}rem / 2)"></i>
+        <i class="icon custom icon-triangle-left {{direction}} {{color}}" style="width: {{size}}rem"></i>
     {% endif %}
 {% endmacro %}

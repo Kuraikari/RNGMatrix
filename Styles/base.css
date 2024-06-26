@@ -3,6 +3,7 @@
 @import "_variables.css";
 @import "_shapes.css";
 @import "_animations.css";
+@import "_icons.css";
 @import "_inputs.css";
 @import "_components.css";
 @import "_nav.css";
@@ -103,71 +104,6 @@ figure:has(> canvas:empty) {
             position: absolute;
             color: black;
             font-size: 24px;
-        }
-    }
-}
-
-.icon.custom {
-    height: 0;
-    width: 0;
-    display: block;
-    transition: 0.25s ease;
-
-    &.icon-triangle-up {
-        clip-path: var(--triangle-up-shape);
-        aspect-ratio: var(--triangle-up-ratio);
-        
-        &.negate {
-            transform: scaleY(-1);
-        }
-    }
-
-    &.icon-triangle-left {
-        clip-path: var(--triangle-left-shape);
-        aspect-ratio: var(--triangle-left-ratio);
-
-        &.negate {
-            transform: scaleX(-1);
-        }
-    }
-
-    &.icon-lock-animated {
-        aspect-ratio: var(--lock-ratio);
-
-        &.open {
-            clip-path: var(--lock-open-shape);
-        }
-
-        &.closed {
-            clip-path: var(--lock-closed-shape);
-        }
-    }
-
-    &.red {
-        background-color: red;
-    }
-
-    &.blue {
-        background-color: blue;
-    }
-
-    &.green {
-        background-color: green;
-    }
-
-    &.orange {
-        background-color: orange;
-    }
-}
-
-*:hover > .icon.custom {
-    &.icon-lock-animated {
-        &.open {
-            clip-path: var(--lock-closed-shape);
-        }
-
-        &.closed {
-            clip-path: var(--lock-open-shape);
         }
     }
 }
