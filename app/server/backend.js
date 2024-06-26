@@ -5,6 +5,7 @@
 import express, { Router } from 'express';        // call express
 import bodyparser from 'body-parser';
 import cors from 'cors';
+import clc from 'cli-color';
 import { LoadJSONFiles, CreateJSONFile } from './utils/json.js';
 
 const title = "RNG-Backend";
