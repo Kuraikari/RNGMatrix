@@ -44,10 +44,4 @@
 
     /* List-entry */
     --song-entry-canvas-height: 128px;
-
-    /* Triangles */
-    --triangle-up-shape: polygon(50% 0, 100% 100%, 0 100%);
-    --triangle-up-ratio: 1/cos(30deg);
-    --triangle-left-shape: polygon(100% 0, 100% 100%, 0 50%);
-    --triangle-left-ratio: 1/2;
 }
