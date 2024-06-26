@@ -20,7 +20,7 @@ frontend.use("/css", express.static(join('./_site/css')));
 frontend.use("/js", express.static(join('./_site/js')));
 frontend.set('view engine', 'njk');
 
-var env = nunjucks.configure(['views', '_includes'], {
+var env = nunjucks.configure(['views', '_includes', '_includes/components'], {
 	autoescape: true,
 	express: frontend,
 	watch: true

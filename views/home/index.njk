@@ -38,6 +38,14 @@
 
                         {% import "triangle.njk" as triangleRight %}
                         {{ triangleRight.shape("right", "orange")}}
+
+                        <button>
+                            {% import "icon.njk" as lock %}
+                            {{ lock.icon("lock-animated open", "blue", "1")}}
+                            <span>
+                                Update
+                            </span>
+                        </button>
                         <p>
                             {% set songs = songModel %}
                             {% include "songsTable.njk" %}
