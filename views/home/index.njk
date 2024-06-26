@@ -41,6 +41,10 @@
 
                         {% import "button.njk" as lockButton %}
                         {{ lockButton.settings("Update", "update", "", "lock-animated custom open", true, "") }}
+                        
+                        {% import "versus.njk" as versus %}
+                        {{ versus.versus("", "") }}
+
                         <p>
                             {% set songs = songModel %}
                             {% include "songsTable.njk" %}
