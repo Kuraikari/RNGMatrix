@@ -38,12 +38,17 @@ backendRouter.get("/status", function (req, res) {
 });
 
 backendRouter.get("/songs", function (req, res) {
+    try {
     LoadJSONFiles()
         .then((resp) => resp)
         .then((data) => {
             res.send({ data });
         })
         .catch(reason => res.send(reason));
+    } catch (e) {
+        console.error(clc.red(e));
+        res.status(500).send(e);
+    }
 });
 
 backendRouter.post("/song/:songId", function (req, res) {
@@ -63,11 +68,20 @@ backendRouter.post("/song/:songId", function (req, res) {
         })
         .catch(reason => res.send(reason));
     } catch (error) {
-        console.error(error);
+        console.error(clc.red(error));
         res.status(500).send(error);
     }
     
 });
+
+backendRouter.delete("/song/:songId", function (req, res) {
+    try {
+        
+    } catch (e) {
+        console.error(clc.red(e));
+        res.status(500).send(e);
+    }
+})
 
 backendRouter.post("/song", async function (req, res) {
     try {
