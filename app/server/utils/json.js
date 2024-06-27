@@ -1,5 +1,6 @@
-import { writeFile, readdir, readFile } from "fs/promises";
+import { writeFile, readdir, readFile, rm } from "fs/promises";
 import SongModel from "../../../Scripts/models/SongModel.js";
+import { JsonDataError } from "./errors/customerrors.js";
 
 /**
  * 
@@ -13,9 +14,14 @@ async function createJson(data) {
         await writeFile(`${path}/${data.returnId()}.json`, jsonContent);
     } catch (e) {
         console.error(e);
+        throw new JsonDataError("Can't write to JSON: \n" + e, 500, "POST/PUT");
     }
 }
 
+/**
+ * Loads the json from the saves folder
+ * @returns {Array<object>} array of the parsed JSON objects from the save files
+ */
 async function loadJson() {
     const path = "./_saves";
     const fileNames = await readdir(path);
@@ -28,6 +34,24 @@ async function loadJson() {
         return files;
     } catch (e) {
         console.error(e);
+        throw new JsonDataError("Can't load JSON: \n" + e, 500, "GET");
+    }
+}
+
+/**
+ * 
+ * @param {string} filename 
+ */
+async function deleteJson(filename) {
+    const path = "./_saves";
+    const fileNames = await readdir(path);
+
+    if (fileNames.includes(filename + ".json")) {
+        try {
+            rm(`${path}/${filename + '.json'}`);
+        } catch (e) {
+            throw new JsonDataError("Can't delete JSON: \n" + e, 500, "DELETE");
+        }
     }
 }
 
