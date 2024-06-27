@@ -57,3 +57,4 @@ async function deleteJson(filename) {
 
 export const CreateJSONFile = createJson;
 export const LoadJSONFiles = loadJson;
+export const DeleteJSONFile = deleteJson;

@@ -8,7 +8,7 @@ import { join } from 'path';
 import * as url from 'url';
 import nunjucks from 'nunjucks';
 
-import { fetchData } from './api/api.js';
+import { fetchData, deleteData } from './api/api.js';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -43,6 +43,15 @@ frontendRouter.get('/song/:id', async (req, res) => {
 	.then(data => data)
 	.then((songModel)=> {
 		res.render('song/index.njk', { songModel });
+	})
+	.catch(reason => res.send(reason));
+});
+
+frontendRouter.get('/song/delete/:id', async (req, res) => {
+	deleteData(req.params.id)
+	.then(data => data)
+	.then(()=> {
+		res.render('home/index.njk');
 	})
 	.catch(reason => res.send(reason));
 });

@@ -6,7 +6,7 @@ import express, { Router } from 'express';        // call express
 import bodyparser from 'body-parser';
 import cors from 'cors';
 import clc from 'cli-color';
-import { LoadJSONFiles, CreateJSONFile } from './utils/json.js';
+import { LoadJSONFiles, CreateJSONFile, DeleteJSONFile } from './utils/json.js';
 
 const title = "RNG-Backend";
 const email = "zwermi@gmail.com";
@@ -76,7 +76,10 @@ backendRouter.post("/song/:songId", function (req, res) {
 
 backendRouter.delete("/song/:songId", function (req, res) {
     try {
-        
+        DeleteJSONFile(req.params.songId)
+        .then((resp) => resp)
+        .then((data) => res.status(200).send("OK"))
+        .catch(reason => res.status(500).send(reason));
     } catch (e) {
         console.error(clc.red(e));
         res.status(500).send(e);
