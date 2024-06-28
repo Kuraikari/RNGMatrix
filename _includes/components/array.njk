@@ -1,0 +1,10 @@
+{% macro array(content, num) %}
+    {% set id = uuid() %}
+    <div id="{{id}}" class="array-wrapper">
+        {% for item in content %}
+            <div class="array-item">
+
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}

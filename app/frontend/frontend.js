@@ -1,7 +1,9 @@
 
 /**
- * FRONTEND
+ * * FRONTEND
+ * This is the frontend server
  */
+
 // call the packages we need
 import express from 'express';        // call express
 import { join } from 'path';
@@ -25,6 +27,21 @@ var env = nunjucks.configure(['views', '_includes', '_includes/components'], {
 	express: frontend,
 	watch: true
 });
+
+/**
+ * UUID generator
+ * @returns {string}
+ */
+function uuidv4() {
+	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+		.replace(/[xy]/g, function (c) {
+		const r = Math.random() * 16 | 0,
+			v = c == 'x' ? r : (r & 0x3 | 0x8);
+		return v.toString(16);
+		});
+}
+
+env.addGlobal('uuid', () => uuidv4());
 
 frontendRouter.get('/', (req, res) => {
 	fetchData(null)
