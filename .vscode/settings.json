@@ -1,0 +1,9 @@
+{
+    "emmet.includeLanguages": {
+        "njk": "html"
+    },
+    "files.associations": {
+        "*.njk": "html"
+    },
+    "editor.foldingStrategy": "indentation"
+}
