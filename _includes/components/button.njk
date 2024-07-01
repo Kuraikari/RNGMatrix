@@ -11,8 +11,14 @@
                 {% endif %}
             </a>
         {% else %}
-            <button class="button button-{{class}}" onClick="{{ onClick }}">
+            <button type="button" class="button button-{{class}}" onClick="{{ onClick }}">
+                {% if prefixIcon | length %}
+                    <i class="icon icon-{{prefixIcon}}"></i>
+                {% endif %}
                 {{text}}
+                {% if suffixIcon | length %}
+                    <i class="icon icon-{{suffixIcon}}"></i>
+                {% endif %}
             </button>
         {% endif %}
     </div>

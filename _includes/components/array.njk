@@ -1,10 +1,18 @@
 {% macro array(content, num) %}
     {% set id = uuid() %}
     <div id="{{id}}" class="array-wrapper">
-        {% for item in content %}
+        <div class="array-body">
+            {% for item in content %}
             <div class="array-item">
-
+                {{content}}
             </div>
         {% endfor %}
+        </div>       
+        <div class="array-footer">
+            <div class="array-footer-action">
+                {% import "button.njk" as footerAction %}
+                {{ footerAction.settings("Add", "add", "", "plus")}}
+            </div>
+        </div>
     </div>
 {% endmacro %}

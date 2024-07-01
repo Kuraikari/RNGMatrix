@@ -140,6 +140,7 @@ form {
     padding: var(--padding-min) var(--padding-med);
     border-radius: 4px;
     transition: all .2s ease;
+    width: fit-content;
 
     &:has(> .button-edit) {
         background-color: var(--edit-color);
@@ -183,5 +184,9 @@ form {
         & > i.custom {
             transform: scale(1rem);
         }
+    }
+
+    & button {
+        all: unset;
     }
 }
