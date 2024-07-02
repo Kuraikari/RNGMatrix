@@ -1,20 +1,32 @@
 :root {
-  --arrow-left-shape-moved: polygon(48% 11%, 48% 30%, 100% 30%, 100% 70%, 48% 70%, 48% 89%, 0% 50%);
+  --arrow-left-shape-moved: polygon(-50% 11%, -50% 30%, 0% 30%, 0% 70%, -50% 70%, -50% 89%, -100% 50%);
   --arrow-left-shape-open: polygon(48% 11%, 48% 30%, 100% 30%, 100% 70%, 48% 70%, 48% 89%, 0% 50%);
   --arrow-left-shape-closed: polygon(0 0, 50% 0, 100% 0, 100% 100%, 50% 100%, 0 100%, 0% 50%);
 
+  --arrow-right-shape-moved: polygon(150% 11%, 150% 30%, 100% 30%, 100% 70%, 150% 70%, 150% 89%, 200% 50%);
+  --arrow-right-shape-open: polygon(48% 11%, 48% 30%, 0% 30%, 0% 70%, 48% 70%, 48% 89%, 100% 50%);
+  --arrow-right-shape-closed: polygon(100% 0, 50% 0, 0% 0, 0% 50%, 0% 100%, 100% 100%, 100% 50%);
 }
 
 
 
 @keyframes arrow-enter {
-  0% { clip-path: polygon(-25% 0%, 0% 50%, -25% 100%, -100% 100%, -75% 50%, -100% 0%); }
-  75% { clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%); }
-  100% { clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 0% 50%, 0% 0%); }
+  0% { clip-path: var(--arrow-left-shape-moved); }
+  75% { clip-path: var(--arrow-left-shape-open); }
+  100% { clip-path: var(--arrow-left-shape-closed); }
 }
   
 @keyframes arrow-leave {
-  0% { clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 0% 50%, 0% 0%); }
-  25% { clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%); }
-  100% { clip-path: polygon(175% 0%, 200% 50%, 175% 100%, 100% 100%, 125% 50%, 100% 0%) }
+  0% { clip-path: var(--arrow-right-shape-closed); }
+  25% { clip-path: var(--arrow-right-shape-open); }
+  100% { clip-path: var(--arrow-right-shape-moved); }
+}
+
+@keyframes arrow-in-out {
+  0% { clip-path: var(--arrow-left-shape-moved); }
+  37.5% { clip-path: var(--arrow-left-shape-open); }
+  49.999% { clip-path: var(--arrow-left-shape-closed); }
+  50% { clip-path: var(--arrow-right-shape-closed); }
+  62.5% { clip-path: var(--arrow-right-shape-open); }
+  100% { clip-path: var(--arrow-right-shape-moved); }
 }
