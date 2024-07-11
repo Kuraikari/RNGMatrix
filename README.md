@@ -2,6 +2,8 @@
 
 RNGMatrix is a web application that utilizes a random number generator to create and manipulate matrices. This project is designed to explore the applications of random matrices in various fields such as computer graphics, simulations, and data analysis.
 
+[![Dependabot Updates](https://github.com/Kuraikari/RNGMatrix/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/Kuraikari/RNGMatrix/actions/workflows/dependabot/dependabot-updates)
+
 ## Table of Contents
 - [Features](#features)
 - [Technologies Used](#technologies-used)
