@@ -1,3 +1,6 @@
+/**************/
+/* Navbar Top */
+/**************/
 :root {
     --menu-width: 37.5em; /* Width of menu */
     --items: 4; /* Number of items you have */
@@ -356,4 +359,21 @@ nav .menu-item.highlight:hover ~ #sub-menu-container #sub-menu-holder #sub-menu-
 }
 #info-box a:hover {
     color: rgba(255,255,255,0.5);
+}
+
+/**************/
+/* Navbar Side */
+/**************/
+
+.navbar-side {
+    display: block;
+    height: 100%;
+    width: max-content;
+    max-width: 4rem;
+    background-color: var(--navigation-background);
+    border-inline-end: var(--accent-color);
+
+    &:is(:hover, :focus-within) {
+        max-width: 250px;
+    }
 }
