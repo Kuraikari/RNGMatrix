@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx @11ty/eleventy && exit 0",
-    "start": "npx @11ty/eleventy && node --env-file=.env app.js"
+    "start": "npx @11ty/eleventy && node --env-file=.env app.js",
+    "build": "npx @11ty/eleventy"
   },
   "type": "module",
   "keywords": [],
