@@ -4,7 +4,7 @@
   "description": "RNGMatrix is a web application that utilizes a random number generator to create and manipulate matrices. This project is designed to explore the applications of random matrices in various fields such as computer graphics, simulations, and data analysis.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx @11ty/eleventy && exit 0",
     "start": "npx @11ty/eleventy && node --env-file=.env app.js"
   },
   "type": "module",
