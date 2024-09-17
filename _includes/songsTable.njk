@@ -16,6 +16,13 @@
                             <div class="entry-meta">
                                 <span>{{ song.name }}</span>
                             </div>
+                            <div class="entry-metadata">
+                                <a class="url" href="{{ song.metadata.url }}">{{ song.metadata.url }}</a>
+                                <span class="title">{{ song.metadata.title }}</span>
+                                <span class="description">{{ song.metadata.description }}</span>
+                                <img class="image" src="{{ song.metadata.image.url }}" alt="song-image">
+                                <span class="audio">{{ song.metadata.audio.url }}</span>
+                            </div>
                             {% import "songsTableActions.njk" as actions %}
                             {{ actions.events("http://localhost:3001/song/" + song.id, "http://localhost:3001/song/delete/" + song.id, "") }}
                         </div>

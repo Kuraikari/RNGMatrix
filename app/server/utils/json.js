@@ -20,7 +20,7 @@ async function createJson(data) {
 
 /**
  * Loads the json from the saves folder
- * @returns {Array<object>} array of the parsed JSON objects from the save files
+ * @returns {Promise<Array<object>>} array of the parsed JSON objects from the save files
  */
 async function loadJson() {
     const path = "./_saves";
@@ -55,6 +55,18 @@ async function deleteJson(filename) {
     }
 }
 
+/**
+ * 
+ * @param {any} id 
+ * @returns 
+ */
+async function findSongById(id) {
+    const songs = await loadJson();
+    const song = songs.filter(x => x.id === id)?.at(0);
+    return song;
+}
+
 export const CreateJSONFile = createJson;
-export const LoadJSONFiles = loadJson;
+export const LoadJSONFiles  = loadJson;
+export const FindSongById   = findSongById;
 export const DeleteJSONFile = deleteJson;

@@ -21,6 +21,11 @@
             <input type="checkbox" id="isFinished" name="isFinished" {% if song.isFinished %}checked{% endif %}>
         </div>
 
+        <div class="input-wrapper url-input">
+            <label for="url">URL: </label>
+            <input type="url" id="url" name="url" value="{{ song.metadata.url }}">
+        </div>
+
         <h3>Song Generations</h3>
         {% if song.songGenerations|length  %}
             {% for generation in song.songGenerations %}

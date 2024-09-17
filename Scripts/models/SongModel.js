@@ -19,10 +19,18 @@ class SongModel {
     parentSong  = null;
     isChild     = !!this.parentSong ? true : false;
     isFinished  = false;
+    metadata    = {
+        url: "",
+        title: "",
+        description: "",
+        image: "",
+        audio: ""
+    }
 
-    constructor() {
-        this.name   = getRandomString(10);
-        this.id     = this.returnId();
+    constructor(metadata = {}) {
+        this.name       = getRandomString(10);
+        this.id         = this.returnId();
+        this.metadata   = metadata;
     }
 
     returnId() {

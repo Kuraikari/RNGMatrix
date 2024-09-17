@@ -6,7 +6,10 @@ import express, { Router } from 'express';        // call express
 import bodyparser from 'body-parser';
 import cors from 'cors';
 import clc from 'cli-color';
-import { LoadJSONFiles, CreateJSONFile, DeleteJSONFile } from './utils/json.js';
+import { LoadJSONFiles, CreateJSONFile, DeleteJSONFile, FindSongById } from './utils/json.js';
+import ogs from 'open-graph-scraper';
+import { isValidUrl } from './utils/validation.js';
+import SongModel from '../../Scripts/models/SongModel.js';
 
 const title = "RNG-Backend";
 const email = "zwermi@gmail.com";
@@ -71,7 +74,6 @@ backendRouter.post("/song/:songId", function (req, res) {
         console.error(clc.red(error));
         res.status(500).send(error);
     }
-    
 });
 
 backendRouter.delete("/song/:songId", function (req, res) {
@@ -88,10 +90,31 @@ backendRouter.delete("/song/:songId", function (req, res) {
 
 backendRouter.post("/song", async function (req, res) {
     try {
-        const { name, description, fullLyrics, isFinished, songGenerations } = req.body;
+        const { name, description, fullLyrics, isFinished, url, songGenerations } = req.body;
+        let metadata = {};
+
+        if (!!url) {
+            const options = { url };
+            const { error, result } = await ogs(options);
+            
+            if (error) {
+                console.error('Open Graph Scraper Error: ', error);
+                return res.status(500).json({error: 'Error fetching URL metdata'});
+            }
+    
+            metadata = {
+                url: url,
+                title: result.ogTitle || result.title || 'No title found',
+                description: result.ogDescription || result.description || 'No description found',
+                image: result.ogImage?.url || 'default-image.png',
+                audio: result.ogAudio || 'No audio found'
+            };
+        }
+        
         const SongModel = (await import("../../Scripts/models/SongModel.js")).default;
         const SongGenerationModel = (await import("../../Scripts/models/SongGenerationModel.js")).default;
-        const song = new SongModel();
+        const song = new SongModel(metadata);
+
         song.name = name;
         song.description = description;
         song.fullLyrics = fullLyrics;
@@ -125,6 +148,43 @@ backendRouter.post("/song", async function (req, res) {
     }
 
 });
+
+backendRouter.get('/song/:songId/song-url', async function (req, res){
+    let id = req.params.songId;
+    const url = req.body.url;
+
+    if (!isValidUrl(url)) {
+        return res.status(400).json({error: 'Invalid URL format'});
+    }
+
+    try {
+        const options = { url };
+        const { error, result } = await ogs(options);
+        
+        if (error) {
+            console.error('Open Graph Scraper Error: ', error);
+            return res.status(500).json({error: 'Error fetching URL metdata'});
+        }
+
+        const metadata = {
+            url: url,
+            title: result.ogTitle || result.title || 'No title found',
+            description: result.ogDescription || result.description || 'No description found',
+            image: result.ogImage?.url || 'default-image.png',
+            audio: result.ogAudio?.url || 'No audio found'
+        };
+
+        let song = await FindSongById();
+        if (!song) {
+            return res.status(404).json({error: 'Song not found'});
+        }
+
+        res.json(metadata);
+    } catch (err) {
+        console.error('Server Error: ', err);
+        res.status(500).json({error: 'Server error'});
+    }
+})
 
 // more routes for our API will happen here
 

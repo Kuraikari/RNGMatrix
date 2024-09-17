@@ -10,7 +10,7 @@ import { join } from 'path';
 import * as url from 'url';
 import nunjucks from 'nunjucks';
 
-import { fetchData, deleteData } from './api/api.js';
+import { fetchData, deleteData, fetchSongMetadata } from './api/api.js';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -71,6 +71,14 @@ frontendRouter.get('/song/delete/:id', async (req, res) => {
 		res.render('home/index.njk');
 	})
 	.catch(reason => res.send(reason));
+});
+
+frontendRouter.get('/song/:songId/song-url', async (req, res) => {
+	let fet = await fetchSongMetadata(req.params.songId, req.body.url);
+	if (Object.keys(fet).includes('error')) res.status(500).send(fet);
+	else {
+		res.status(200).json(fet);
+	}
 });
 
 frontend.use('/', frontendRouter);

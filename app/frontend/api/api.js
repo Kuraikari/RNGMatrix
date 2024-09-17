@@ -67,18 +67,34 @@ async function fetchData(id) {
 async function deleteData(id) {
     try {
         if (!id) throw new Error("Missing ID!");
-        else {
-            const re = await fetch(`http://localhost:3000/api/song/${id}`, {
-                method: "DELETE",
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8'
-                }
-            });
-            return re.json();
-        }
+        const re = await fetch(`http://localhost:3000/api/song/${id}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        });
+        return re.json();
     } catch(e) {
         console.error(e);
         return null;
+    }
+}
+
+async function fetchSongMetadata(id, url) {
+    try {
+        if (!id) throw new Error("Missing ID!");
+        const re = await fetch(`http://localhost:3000/api/song/${id}/song-url`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            body: {
+                url
+            }
+        });
+        return re.json();
+    } catch (err) {
+
     }
 }
 
@@ -86,5 +102,6 @@ export {
     fetchStatus,
     fetchData,
     createData,
-    deleteData
+    deleteData,
+    fetchSongMetadata
 }

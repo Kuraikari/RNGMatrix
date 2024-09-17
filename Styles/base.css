@@ -25,6 +25,11 @@ body {
     color: var(--primary-foreground);
 }
 
+.main-body {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+}
+
 h1 {
     font-size: var(--font-size-xxxlarge);
     font-weight: bold;

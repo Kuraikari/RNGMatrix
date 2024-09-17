@@ -15,7 +15,8 @@
     </head>
     <body>
         {% block main %}
-            {% include "navbar_top.njk" %}
+        {% include "navbar_top.njk" %}
+        <div class="main-body">
             {% include "navbar_side.njk" %}
             {% block content %}
                 <section class="section medium">
@@ -54,7 +55,8 @@
                     </main>
                 </section>
             {% endblock content %}
-            {% include "footer.njk" %}
+        </div>
+        {% include "footer.njk" %}
         {% endblock %}
         {% include "scripts.njk" %}
     </body>
