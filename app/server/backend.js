@@ -106,10 +106,15 @@ backendRouter.post("/song", async function (req, res) {
                 url: url,
                 title: result.ogTitle || result.title || 'No title found',
                 description: result.ogDescription || result.description || 'No description found',
-                image: result.ogImage?.url || 'default-image.png',
-                audio: result.ogAudio || 'No audio found'
+                image: result.ogImage[0].url || 'default-image.png',
+                audio: result.ogAudioURL || 'No audio found'
             };
+
+            console.debug(result);
+            console.debug(result.ogImage);
+            console.debug(metadata);
         }
+
         
         const SongModel = (await import("../../Scripts/models/SongModel.js")).default;
         const SongGenerationModel = (await import("../../Scripts/models/SongGenerationModel.js")).default;
