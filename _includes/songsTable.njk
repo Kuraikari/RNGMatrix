@@ -12,16 +12,22 @@
                         <div id="{{ song.id }}" class="entry-list-item">
                             <figure>
                                 <canvas data-songname="{{song.name}}"></canvas>
+                                {% if song.metadata.image|length %}
+                                    <img class="image" src="{{ song.metadata.image }}" alt="song-image" height="250" width="250">
+                                {% endif %}
                             </figure>
                             <div class="entry-meta">
                                 <span>{{ song.name }}</span>
                             </div>
                             <div class="entry-metadata">
-                                <a class="url" href="{{ song.metadata.url }}">{{ song.metadata.url }}</a>
-                                <span class="title">{{ song.metadata.title }}</span>
-                                <span class="description">{{ song.metadata.description }}</span>
-                                <img class="image" src="{{ song.metadata.image }}" alt="song-image" height="250" width="250">
-                                <span class="audio">{{ song.metadata.audio }}</span>
+                                <a class="url" href="{{ song.metadata.url }}">{{ song.metadata.url }}</a><br>
+                                <span class="title">{{ song.metadata.title }}</span><br>
+                                <span class="description">{{ song.metadata.description }}</span><br>
+                                <span class="lyrics" style="display: none;">{{ song.fullLyrics }}</span>
+                                <audio controls>
+                                    <source src="{{ song.metadata.audio }}">
+                                    Your browser does not support the audio tag.
+                                </audio>
                             </div>
                             {% import "songsTableActions.njk" as actions %}
                             {{ actions.events("http://localhost:3001/song/" + song.id, "http://localhost:3001/song/delete/" + song.id, "") }}
@@ -38,3 +44,50 @@
         </div>
     </div>
 </div>
+<script lang="js">
+    var cursorX = -1;
+    var cursorY = -1;
+
+    document.onmousemove = (event) => {
+        cursorX = event.pageX;
+        cursorY = event.pageY;
+    }
+
+    const songs = [];
+    let audioElements = document.querySelectorAll('.entry-list-item > .entry-metadata > audio');
+    audioElements.forEach(audio => {
+        audio.addEventListener("play", (e) => {
+            if (e.target instanceof HTMLAudioElement)
+            {
+                let div = document.getElementById("lyrics");
+                let text = e.target.parentNode.querySelector("span.lyrics").textContent;
+                if (!div) {
+                    let lyricsDiv = document.createElement("div");
+                    lyricsDiv.classList.add("lyrics-container");
+                    lyricsDiv.id = "lyrics";
+                    lyricsDiv.textContent = text;
+                    lyricsDiv.style.top = (cursorY + 48) + "px";
+                    document.getElementsByTagName("main")[0].appendChild(lyricsDiv);                  
+                } else {
+                    div.textContent = text;
+                    div.style.top = (cursorY - 128) + "px";
+                    div.style.display = "block";
+                }
+            }
+         });
+        
+        audio.addEventListener("pause", (e) => {
+            if (e.target instanceof HTMLAudioElement)
+            {
+                let div = document.getElementById("lyrics");
+                let text = e.target.parentNode.querySelector("span.lyrics").textContent;
+                if (!!div) {
+                    div.textContent = text;
+                    div.style.display = "none";
+                }          
+            }
+        })
+        songs.push(audio);
+    });
+    
+</script>
