@@ -66,7 +66,7 @@
                     lyricsDiv.classList.add("lyrics-container");
                     lyricsDiv.id = "lyrics";
                     lyricsDiv.textContent = text;
-                    lyricsDiv.style.top = (cursorY + 48) + "px";
+                    lyricsDiv.style.top = (cursorY - 128) + "px";
                     document.getElementsByTagName("main")[0].appendChild(lyricsDiv);                  
                 } else {
                     div.textContent = text;
