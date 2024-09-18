@@ -1,5 +1,5 @@
 <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-<form action="http://localhost:3000/api/song" method="post" target="dummyframe">
+<form action="http://localhost:3001" method="post" target="dummyframe">
         <h2>Song Model - {{song.name}}</h2>
         
         <div class="input-wrapper text-input">
@@ -137,6 +137,6 @@
 
         <div class="input-wrapper submit-input">
             <i class="icon icon-checkmark"></i>
-            <input class="" type="submit" value="Submit" >
+            <input class="" type="submit" value="Submit" formaction="http://localhost:3000/api/song" formmethod="post">
         </div>
     </form>

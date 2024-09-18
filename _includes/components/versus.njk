@@ -1,6 +1,10 @@
 {% macro versus(name1, name2) %}
     <div class="versus-wrapper">
-        <div class="versus-left" tabindex="-1"></div>
-        <div class="versus-right" tabindex="-1"></div>
+        <div class="versus-left" tabindex="-1">
+            {{ name1 }}
+        </div>
+        <div class="versus-right" tabindex="-1">
+            {{ name2 }}
+        </div>
     </div>
 {% endmacro %}
